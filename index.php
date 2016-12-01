@@ -2,10 +2,14 @@
 $color = "";
 $rightOrWrong = "";
 
+if (!isset($_SESSION["login"])){
+  $_SESSION["totalQuestions"] = 0;
+  $_SESSION["questionsRight"] = 0;
+  header("Location: login.php");
+}
 if (isset($_POST["logout"])) {
-  $_SESSION["login"] = null;
-  unset($_SESSION["totalQuestions"]);
-  unset($_SESSION["questionsRight"]);
+  session_destroy();
+  header("Location: login.php");
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -30,11 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $_POST["userAns"] = "";
 }
 
-if (!isset($_SESSION["login"])){
-  $_SESSION["totalQuestions"] = 0;
-  $_SESSION["questionsRight"] = 0;
-  header("Location: login.php");
-}
+
 
 $num1 = rand(0,20);
 $num2 = rand(0,20);

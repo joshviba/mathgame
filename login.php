@@ -5,6 +5,8 @@ $correctPass = "aaa";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if($_POST["email"] == $correctEmail && $_POST["password"] == $correctPass){
     $_SESSION["login"] = "true";
+    $_SESSION["totalQuestions"] = 0;
+    $_SESSION["questionsRight"] = 0;
     header("Location: index.php");
   } else {
     $nameErr = "<div style='color: red'>* Email or Password incorrect</div>";
