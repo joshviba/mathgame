@@ -8,16 +8,16 @@ if (isset($_POST["logout"])) {
   unset($_SESSION["questionsRight"]);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && is_Numeric($_POST["userAns"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["userAns"]) || is_null($_POST["userAns"]) || !is_Numeric($_POST["userAns"])) {
     $color = 'class="text-danger"';
     $rightOrWrong = "You must enter a number for an answer.";
-  } elseif ($_POST["correctAns"] == $_POST["userAns"]){
+  } elseif ($_POST["correctAns"] == $_POST["userAns"] && is_Numeric($_POST["userAns"])){
     $color = 'class="text-success"';
     $_SESSION["totalQuestions"]++;
     $_SESSION["questionsRight"]++;
     $rightOrWrong = "Correct!";
-  } else {
+  } elseif (is_Numeric($_POST["userAns"])) {
     $color = 'class="text-danger"';
     $_SESSION["totalQuestions"]++;
     $rightOrWrong = "WRONG! " . $_POST["number1"];
