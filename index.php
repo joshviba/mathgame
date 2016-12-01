@@ -2,7 +2,7 @@
 $color = "";
 $rightOrWrong = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && is_Numeric($_POST["userAns"])) {
   if (isset($_POST["logout"])) {
     $_SESSION["login"] = null;
     unset($_SESSION["totalQuestions"]);
