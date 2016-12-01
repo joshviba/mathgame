@@ -2,12 +2,14 @@
 $color = "";
 $rightOrWrong = "";
 
+if (isset($_POST["logout"])) {
+  $_SESSION["login"] = null;
+  unset($_SESSION["totalQuestions"]);
+  unset($_SESSION["questionsRight"]);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && is_Numeric($_POST["userAns"])) {
-  if (isset($_POST["logout"])) {
-    $_SESSION["login"] = null;
-    unset($_SESSION["totalQuestions"]);
-    unset($_SESSION["questionsRight"]);
-  } elseif (empty($_POST["userAns"]) || is_null($_POST["userAns"]) || !is_Numeric($_POST["userAns"])) {
+  if (empty($_POST["userAns"]) || is_null($_POST["userAns"]) || !is_Numeric($_POST["userAns"])) {
     $color = 'class="text-danger"';
     $rightOrWrong = "You must enter a number for an answer.";
   } elseif ($_POST["correctAns"] == $_POST["userAns"]){
